@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Lista de Entrenadores</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" th:href="@{/css/entrenador_list.css}">
+    <link rel="shortcut icon" th:href="@{/img/favicon.png}" type="image/x-icon">
+    <link rel="stylesheet" th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css}" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        /* Estilos generales para aplicar el esquema de color */
+        body {
+            background-color: #000; /* Fondo negro */
+            color: 			rgb(255, 255, 0); /* Texto amarillo */
+							font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+        }
+
+        h1 {
+            color: 			rgb(255, 255, 0); /* Títulos amarillos */
+        }
+
+        table {
+            background-color: #333; /* Fondo oscuro en la tabla */
+        }
+
+        th {
+            color: rgb(255, 255, 0); /* Texto amarillo en encabezados */
+        }
+
+        td {
+            color: #fff; /* Texto blanco en filas */
+        }
+
+        .btn-secondary {
+            background-color: rgb(255, 255, 0);
+            border: none;
+            color: #000;
+        }
+
+        .btn-secondary:hover {
+            background-color: rgb(255, 255, 0);
+			color: rgb(0, 0, 0);
+        }
+
+        /* Estilos para los botones */
+        .btn-danger {
+            background-color: #ff0000;
+            border: none;
+        }
+
+        .btn-danger:hover {
+            background-color: #cc0000;
+        }
+
+        /* Estilo para alinear los botones juntos */
+        td .btn {
+            margin-right: 10px;
+        }
+
+        /* Contenedor de la cabecera */
+        .cont_header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .logo img {
+            max-width: 150px;
+        }
+
+        .buttons-group {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .btn-group .btn {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+<header>
+    <div class="cont_header">
+        <div class="logo">
+            <a th:href="@{/}">
+                <img th:src="@{/img/logo.png}" alt="">
+            </a>
+        </div>
+    </div>
+</header>
+
+<main>
+    <div class="container mt-5">
+        <div class="cont_main">
+           <center><h1>Lista de Entrenadores</h1>			</center> 
+            <table class="table table-white table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Edad</th>
+                        <th>Nacionalidad</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="entrenador : ${entrenadores}">
+                        <td th:text="${entrenador.id}"></td>
+                        <td th:text="${entrenador.nombre}"></td>
+                        <td th:text="${entrenador.apellido}"></td>
+                        <td th:text="${entrenador.edad}"></td>
+                        <td th:text="${entrenador.nacionalidad}"></td>
+                        <td>
+                            <a class="btn btn-warning text-dark" th:href="@{/entrenadores/edit/{id}(id = ${entrenador.id})}">
+                                Editar
+                            </a>
+                            <a th:href="@{/entrenadores/delete/{id}(id=${entrenador.id})}" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar este entrenador?');">
+                                Eliminar
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Botones de Agregar Nuevo Entrenador y Regresar alineados -->
+        <div class="buttons-group mt-4">
+            <a th:href="@{/entrenadores/new}" class="btn btn-secondary">Agregar Nuevo Entrenador</a>
+            <a th:href="@{/}" class="btn btn-secondary">Regresar</a>
+        </div>
+    </div>
+</main>
+
+<!-- Optional JavaScript -->
+<script th:src="@{https://code.jquery.com/jquery-3.3.1.slim.min.js}" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js}" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script th:src="@{https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js}" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+
+</html>

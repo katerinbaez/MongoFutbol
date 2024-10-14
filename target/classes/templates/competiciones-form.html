@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title th:text="${competicion.id} == null ? 'Agregar Competición' : 'Editar Competición'">Formulario Competición</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" th:href="@{/css/competicion_form.css}">
+    <link rel="shortcut icon" th:href="@{/img/favicon.png}" type="image/x-icon">
+    <link rel="stylesheet" th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css}" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        /* Estilos generales para aplicar el esquema de color */
+        body {
+            background-color: #000; /* Fondo negro */
+            color: rgb(255, 255, 0); /* Texto amarillo */
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+
+        h1 {
+            color: rgb(255, 255, 0); /* Títulos amarillos */
+            text-align: center;
+        }
+
+        .cont_header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .logo img {
+            max-width: 150px;
+        }
+
+        .BIENVENIDO {
+            color: rgb(255, 255, 0);
+        }
+
+        .cont {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin-top: 50px;
+        }
+
+        .form-control {
+            background-color: #333; /* Fondo oscuro en los campos */
+            color: #fff; /* Texto blanco en campos */
+        }
+
+        .form-control::placeholder {
+            color: #fff; /* Texto de placeholder en blanco */
+        }
+
+        label {
+            color: rgb(255, 255, 0); /* Etiquetas amarillas */
+        }
+
+        .btn-primary {
+            background-color: rgb(255, 255, 0);
+            border: none;
+            color: #000;
+        }
+
+        .btn-primary:hover {
+            background-color: rgb(255, 255, 0);
+            color: rgb(0, 0, 0);
+        }
+
+        .button-group {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+<header>
+    <div class="cont_header">
+        <div class="BIENVENIDO"></div>
+    </div>
+</header>
+<main>
+    <div class="cont">
+        <div class="cont_main">
+            <h1 th:text="${competicion.id} == null ? 'Formulario Competición' : 'Editar Competición'"></h1>
+            <form th:action="@{/competiciones/save}" th:object="${competicion}" method="post">
+                <input type="hidden" th:field="*{id}">
+
+                <div class="form-group">
+                    <label for="nombre">Nombre de la Competición</label>
+                    <input type="text" class="form-control" id="nombre" name="nombre" th:value="${competicion.nombre}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="montoPremio">Monto del Premio</label>
+                    <input type="number" class="form-control" id="montoPremio" name="montoPremio" th:value="${competicion.montoPremio}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="fechaInicio">Fecha de Inicio</label>
+                    <input type="date" class="form-control" id="fechaInicio" name="fechaInicio" th:value="${formattedFechaInicio}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="fechaFin">Fecha de Fin</label>
+                    <input type="date" class="form-control" id="fechaFin" name="fechaFin" th:value="${formattedFechaFin}" required>
+                </div>
+
+                <div class="button-group">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <a th:href="@{/competiciones/}" class="btn btn-primary">Regresar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+
+<!-- Optional JavaScript -->
+<script th:src="@{https://code.jquery.com/jquery-3.3.1.slim.min.js}" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js}" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script th:src="@{https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js}" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+
+</html>
