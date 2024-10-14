@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Lista de Jugadores</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" th:href="@{/css/jugadores_list.css}">
+    <link rel="shortcut icon" th:href="@{/img/favicon.png}" type="image/x-icon">
+    <link rel="stylesheet" th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css}" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        /* Estilos generales */
+        body {
+            background-color: #000; /* Fondo negro */
+            color: rgb(255, 255, 0); /* Texto amarillo */
+            font-family: 'Lucida Sans', Geneva, Verdana, sans-serif;
+        }
+
+        h1 {
+            color: rgb(255, 255, 0); /* Título amarillo */
+        }
+
+        table {
+            background-color: #333; /* Fondo oscuro en la tabla */
+        }
+
+        th {
+            color: rgb(255, 255, 0); /* Texto amarillo en encabezados */
+        }
+
+        td {
+            color: #fff; /* Texto blanco en filas */
+        }
+
+        .btn-secondary {
+            background-color: rgb(255, 255, 0);
+            border: none;
+            color: #000;
+        }
+
+        .btn-secondary:hover {
+            background-color: rgb(255, 255, 0);
+            color: #000;
+        }
+
+        .btn-danger {
+            background-color: #ff0000;
+            border: none;
+        }
+
+        .btn-danger:hover {
+            background-color: #cc0000;
+        }
+
+        td .btn {
+            margin-right: 10px;
+        }
+
+        .cont_header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .logo img {
+            max-width: 150px;
+        }
+
+        .buttons-group {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .btn-group .btn {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+<header>
+    <div class="cont_header">
+        <div class="logo">
+            <a th:href="@{/}">
+                <img th:src="@{/img/logo.png}" alt="">
+            </a>
+        </div>
+        <div class="titulo">
+            <h1>Lista de Jugadores</h1>
+        </div>
+        <div class="agregar-jugador">
+         
+        </div>
+    </div>
+</header>
+
+<main>
+    <div class="container mt-5">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Número</th>
+                        <th>Posición</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="jugador : ${jugadores}">
+                        <td th:text="${jugador.id}">ID</td>
+                        <td th:text="${jugador.nombre}">Nombre</td>
+                        <td th:text="${jugador.apellido}">Apellido</td>
+                        <td th:text="${jugador.numero}">Número</td>
+                        <td th:text="${jugador.posicion}">Posición</td>
+                        <td>
+                            <a th:href="@{'/jugadores/edit/' + ${jugador.id}}" class="btn btn-warning text-dark">Editar</a>
+                            <a th:href="@{'/jugadores/delete/' + ${jugador.id}}" class="btn btn-danger" onclick="return confirm('¿Estás seguro de eliminar este jugador?');">Eliminar</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Botones de Regresar y Agregar -->
+        <div class="buttons-group mt-4">
+            <a th:href="@{/jugadores/new}" class="btn btn-secondary">Agregar Jugador</a>
+            <a th:href="@{/}" class="btn btn-secondary">Regresar</a>
+        </div>
+    </div>
+</main>
+
+<!-- Optional JavaScript -->
+<script th:src="@{https://code.jquery.com/jquery-3.3.1.slim.min.js}" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js}" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script th:src="@{https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js}" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+
+</html>

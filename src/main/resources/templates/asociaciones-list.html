@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Tabla de Asociaciones</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" th:href="@{/css/team_table.css}">
+    <link rel="shortcut icon" th:href="@{/img/favicon.png}" type="image/x-icon">
+    <link rel="stylesheet" th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css}" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #1c1c1c; /* Fondo oscuro */
+            color: #ffffff; /* Color de texto blanco */
+					font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+        }
+        
+        .cont {
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center; /* Centrar el título */
+            color: #ffffff; /* Color del título */
+			font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            margin-bottom: 20px; /* Espaciado inferior */
+            font-size: 36px; /* Tamaño de fuente más grande */
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center; /* Centrar los botones */
+            margin-top: 20px; /* Espaciado superior */
+            gap: 10px; /* Espacio entre botones */
+        }
+
+      
+
+        .table {
+            background-color: rgb(255, 255, 255); /* Fondo de tabla blanco */
+            border-radius: 5px; /* Bordes redondeados */
+            overflow: hidden; /* Ocultar bordes */
+            margin: auto; /* Centrar la tabla */
+        }
+
+        .table th, .table td {
+            text-align: center;
+            vertical-align: middle; /* Centrar verticalmente */
+            border: none; /* Sin bordes */
+        }
+
+        .table th {
+            background-color: rgb(255, 255, 0); /* Amarillo pálido */
+            color: #1d3557; /* Azul oscuro */
+        }
+
+        .table tbody tr:hover {
+            background-color: rgb(255, 255, 128); /* Amarillo al pasar el cursor */
+        }
+
+        .table tbody tr {
+            transition: background-color 0.3s; /* Transición suave */
+        }
+
+        .bi {
+            cursor: pointer;
+        }
+		    .add {
+		        padding: 10px 25px;
+		        background-color: #c2d600; /* Azul oscuro */
+		        color: rgb(0, 0, 0); /* Texto blanco */
+		        border-radius: 25px; /* Bordes completamente redondeados */
+		        text-decoration: none;
+		        transition: background-color 0.4s, transform 0.2s; /* Efecto suave y ligero zoom */
+		        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Sombra más intensa */
+		        font-weight: bold;
+		        font-size: 16px;
+		    }
+		
+		    .add:hover {
+		        background-color: rgb(255, 255, 0); /* Cambio a azul claro al pasar el mouse */
+		        transform: scale(1.05); /* Zoom al pasar el mouse */
+		        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); /* Sombra más grande en hover */
+		    }
+		
+		    .add:active {
+		        background-color: #1d3557; /* Azul más oscuro al hacer clic */
+		        transform: scale(0.98); /* Ligera contracción al hacer clic */
+		    }
+		
+		    .button-container {
+		        display: flex;
+		        justify-content: center; /* Centrar botones */
+		        margin-top: 20px; /* Espaciado superior */
+		        gap: 15px; /* Más espacio entre botones */
+		    }
+
+    </style>
+</head>
+
+<body>
+<header>
+    <div class="cont_header">
+        <div class="logo">
+            <a th:href="@{/}">
+                <img th:src="@{/img/logo.png}" alt="" style="height: 50px;">
+            </a>
+        </div>
+        <div class="BIENVENIDO">
+        </div>
+    </div>
+</header>
+
+<main>
+    <div class="cont">
+        <h2>Tabla de Asociaciones</h2> <!-- Título agregado -->
+        <table class="table table-striped m-1 tab">
+            <thead>
+                <tr>
+                    <th><strong>Id</strong></th>
+                    <th><strong>Nombre</strong></th>
+                    <th><strong>País</strong></th>
+                    <th><strong>Presidente</strong></th>
+                    <th><strong>Editar</strong></th>
+                    <th><strong>Eliminar</strong></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="asociacion : ${asociaciones}">
+                    <td>[[ ${asociacion.id} ]]</td>
+                    <td>[[ ${asociacion.nombre} ]]</td>
+                    <td>[[ ${asociacion.pais} ]]</td>
+                    <td>[[ ${asociacion.presidente} ]]</td>
+                    <td>
+                        <a class="text-warning" th:href="@{/asociaciones/edit/{id}(id=${asociacion.id})}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                            </svg>
+                        </a>
+                    </td>
+                    <td>
+                        <a class="text-danger" 
+                           th:href="@{/asociaciones/delete/{id}(id=${asociacion.id})}" 
+                           onclick="return confirm('¿Estás seguro de que deseas eliminar esta asociación?');">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                 class="bi bi-x-square" viewBox="0 0 16 16">
+                                <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                            </svg>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="button-container">
+            <a th:href="@{/asociaciones/new}" class="add">
+                Agregar
+            </a>
+            <a th:href="@{/}" class="add">
+                Regresar
+            </a>
+        </div>
+    </div>
+</main>
+</body>
+
+</html>
